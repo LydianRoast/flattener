@@ -1,0 +1,14 @@
+/local/
+/target/
+/dist/
+*.pdb
+*.tmp
+*.part
+*.log
+.DS_Store
+Thumbs.db
+/Design References/
+/The Basic Principals of Design/
+/CARI*/
+/.env
+/.env.*

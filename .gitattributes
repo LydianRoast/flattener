@@ -1,0 +1,16 @@
+* text=auto eol=lf
+*.rs text eol=lf
+*.md text eol=lf
+*.toml text eol=lf
+*.yml text eol=lf
+*.pdf binary
+*.png binary
+*.ico binary
+*.jpg binary
+*.rten binary
+*.ttf binary
+# Preserve upstream license text, including its original whitespace.
+licenses/** -whitespace
+assets/fonts/OFL.txt -whitespace
+assets/ocr/LICENSE-CC-BY-SA-4.0.txt -whitespace
+docs/THIRD_PARTY_LICENSES.txt -whitespace

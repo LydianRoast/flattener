@@ -1,0 +1,40 @@
+[package]
+name = "flattener"
+version = "0.2.0"
+edition = "2024"
+rust-version = "1.94"
+license = "MIT"
+description = "Make flattened, searchable PDF copies for legacy Acrobat viewers."
+repository = "https://github.com/LydianRoast/flattener"
+
+[features]
+default = ["gui"]
+gui = ["dep:eframe", "dep:rfd"]
+
+[dependencies]
+anyhow = "1"
+hayro = "=0.8.0"
+lopdf = "=0.44.0"
+image = { version = "0.25", default-features = false, features = ["jpeg", "png"] }
+flate2 = { version = "1", default-features = false, features = ["rust_backend"] }
+tempfile = "3"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+ocrs = { version = "=0.13.1", default-features = false, features = ["rten"] }
+rten = { version = "=0.26.0", default-features = false, features = ["rten_format"] }
+rten-imageproc = "=0.26.0"
+rten-tensor = "=0.26.0"
+eframe = { version = "=0.32.3", optional = true, default-features = false, features = ["glow", "default_fonts", "x11", "persistence", "accesskit"] }
+rfd = { version = "0.15", optional = true, default-features = false }
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_System_JobObjects", "Win32_System_Threading", "Win32_System_Console", "Win32_Security"] }
+
+[profile.dev]
+debug = 0
+incremental = false
+
+[profile.release]
+strip = true
+lto = "thin"
+codegen-units = 1

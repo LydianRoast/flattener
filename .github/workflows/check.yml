@@ -1,0 +1,22 @@
+name: Rust checks
+on:
+  push:
+    branches: [Master]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain
+        run: rustup toolchain install stable --profile minimal --component rustfmt --component clippy
+      - name: Format
+        run: cargo +stable fmt --check
+      - name: Lint
+        run: cargo +stable clippy --all-targets --locked -- -D warnings
+      - name: Test
+        run: cargo +stable test --release --all-targets --locked
+      - name: Release build
+        run: cargo +stable build --release --locked
